@@ -9,11 +9,26 @@
                 </h1>
                 
                 <?php
-                $sql = "SELECT * FROM users WHERE id=1";
-                $result = $database->query($sql);
-                $user_found = mysqli_fetch_array($result);
-                echo $user_found['first_name'];
+
+//                // because we used static property for find_all_users function, so we can call find_all_users function like that
+//                $result_set = User::find_all_users();
+//                // and loop trought the result
+//                while($row = mysqli_fetch_array($result_set)) {
+//                
+//                    echo $row['username'] . "<br>";
+//                    
+//                }
                 
+//                $found_user = User::find_user_by_id(3);
+//                
+//                $user = User::instantiation($found_user);
+//                
+//                echo $user->last_name;
+
+                $users = User::find_all_users();
+                foreach($users as $user){
+                    echo $user->id . "<br>";
+                }
                 ?>
                 
                 <ol class="breadcrumb">
