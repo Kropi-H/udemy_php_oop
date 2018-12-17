@@ -25,12 +25,19 @@
 //                
 //                echo $user->last_name;
 
-                $users = User::find_all_users();
-                foreach($users as $user){
-                    echo $user->id . "<br>";
-                }
-                ?>
+//                $users = User::find_all_users();
+//                foreach($users as $user){
+//                    echo $user->username . "<br>";
+//                }
                 
+                
+                $found_user = User::find_user_by_id(1);
+                echo $found_user->username;
+
+                $auto = new Car;
+                $auto->run();
+//                echo var_dump($users);
+                ?>
                 <ol class="breadcrumb">
                     <li>
                         <i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>

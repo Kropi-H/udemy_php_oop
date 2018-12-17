@@ -10,17 +10,26 @@ class User {
         
 //  new function to find all users    
     static public function find_all_users(){
+        global $database;
 
         return self::find_this_query("SELECT * FROM users");  
         
     }
     
     static public function find_user_by_id($id){
-        $result_set = self::find_this_query("SELECT * FROM users WHERE id=$id");  
-
+        global $database;
+        $the_result_array = self::find_this_query("SELECT * FROM users WHERE id=$id");  
         
-        $found_user = mysqli_fetch_array($result_set);
-        return $found_user;
+//        return !empty($the_result_array) ? array_shift($the_result_array) : false;
+        
+        if(!empty($the_result_array)){
+            $first_item = array_shift($the_result_array);
+        } else {
+            return false;
+        }
+        
+        
+        return $first_item;
     }
     
     public static function find_this_query($sql){
@@ -45,7 +54,7 @@ class User {
 //        $the_object->first_name = $found_user['first_name'];                
 //        $the_object->last_name  = $found_user['last_name'];
         
-        foreach($the_object as $the_attribute => $value){
+        foreach($the_record as $the_attribute => $value){
             
             if($the_object->has_the_attribute($the_attribute)){
               $the_object->$the_attribute = $value;  
