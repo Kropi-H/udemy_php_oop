@@ -23,7 +23,7 @@ class Database {
             die("Database connection failed padly" . $this->connection->connect_error);
                         
         } else {
-            echo "we are connected";
+//            echo "we are connected";
         }
     
     }
