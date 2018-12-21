@@ -7,35 +7,20 @@
                     <span style="text-transform:uppercase;">Admin</span>
                     <small></small>
                 </h1>
-                
                 <?php
+                  // $user = new User();
+                  // $user->username = "bloody";
+                  // $user->password = "666";
+                  // $user->first_name = "Johny";
+                  // $user->last_name = "Dracula";
+                  //
+                  // $user->create();
 
-//                // because we used static property for find_all_users function, so we can call find_all_users function like that
-//                $result_set = User::find_all_users();
-//                // and loop trought the result
-//                while($row = mysqli_fetch_array($result_set)) {
-//                
-//                    echo $row['username'] . "<br>";
-//                    
-//                }
-                
-//                $found_user = User::find_user_by_id(3);
-//                
-//                $user = User::instantiation($found_user);
-//                
-//                echo $user->last_name;
+                  $user = User::find_user_by_id(10);
 
-//                $users = User::find_all_users();
-//                foreach($users as $user){
-//                    echo $user->username . "<br>";
-//                }
-                
-                
-                $found_user = User::find_user_by_id(1);
-                echo $found_user->username;
+                  $user->delete();
 
-//                echo var_dump($users);
-                ?>
+                 ?>
                 <ol class="breadcrumb">
                     <li>
                         <i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>
