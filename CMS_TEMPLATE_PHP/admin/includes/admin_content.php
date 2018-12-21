@@ -8,17 +8,28 @@
                     <small></small>
                 </h1>
                 <?php
-                  // $user = new User();
-                  // $user->username = "bloody";
-                  // $user->password = "666";
-                  // $user->first_name = "Johny";
-                  // $user->last_name = "Dracula";
-                  //
-                  // $user->create();
+                  $user = new User();
+                  $user->username = "student";
+                  $user->password = "654321";
+                  $user->first_name = "Lazy";
+                  $user->last_name = "Boban";
 
-                  $user = User::find_user_by_id(10);
+                  $user->create();
 
-                  $user->delete();
+                  // $user = User::find_user_by_id(14);
+                  // $user->delete();
+
+                  // $user = User::find_user_by_id(9);
+                  // $user->username = "bloodsuck";
+                  // $user->update();
+
+                  // $user =new User();
+                  // $user->username = "Karl";
+                  // $user->save();
+
+                  // $user = User::find_user_by_id(16);
+                  // $user->last_name = "Bug";
+                  // $user->save();
 
                  ?>
                 <ol class="breadcrumb">
