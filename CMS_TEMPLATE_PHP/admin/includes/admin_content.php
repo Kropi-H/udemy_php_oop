@@ -8,15 +8,15 @@
                     <small></small>
                 </h1>
                 <?php
-                  $user = new User();
-                  $user->username = "student";
-                  $user->password = "654321";
-                  $user->first_name = "Lazy";
-                  $user->last_name = "Boban";
+                  // $user = new User();
+                  // $user->username = "baby";
+                  // $user->password = "24.12.0000";
+                  // $user->first_name = "jezisek";
+                  // $user->last_name = "robatko";
+                  //
+                  // $user->create();
 
-                  $user->create();
-
-                  // $user = User::find_user_by_id(14);
+                  // $user = User::find_by_id(28);
                   // $user->delete();
 
                   // $user = User::find_user_by_id(9);
@@ -24,12 +24,39 @@
                   // $user->update();
 
                   // $user =new User();
-                  // $user->username = "Karl";
+                  // $user->username = "Axík";
                   // $user->save();
 
-                  // $user = User::find_user_by_id(16);
-                  // $user->last_name = "Bug";
-                  // $user->save();
+                  // $users = User::find_all();
+                  // foreach ($users as $user){
+                  //   echo $user->username;
+                  // }
+
+                  $photos = Photo::find_all();
+                  foreach ($photos as $photo){
+                    echo $photo->id . "<br />";
+                    echo $photo->title . "<br />";
+                    echo $photo->description . "<br />";
+                    echo $photo->filename . "<br />";
+                    echo $photo->type . "<br />";
+                    echo $photo->size . "<br />";
+                  }
+
+                  // $photo = new Photo();
+                  // $photo->title = "photo_from_web";
+                  // $photo->description = "this is my new push photo right from the webpage";
+                  // $photo->filename = "fotecka_c_002.png";
+                  // $photo->type = "image";
+                  // $photo->size = 103;
+                  //
+                  // $photo->create();
+
+                  // $photo = Photo::find_by_id(6);
+                  // $photo->delete();
+
+                  // echo INCLUDES_PATH;
+                  // echo "<br />";
+                  // echo SITE_ROOT;
 
                  ?>
                 <ol class="breadcrumb">

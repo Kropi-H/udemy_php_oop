@@ -1,4 +1,6 @@
 <?php include("includes/header.php"); ?>
+<?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
+<?php $photos = Photo::find_all(); ?>
 
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -23,14 +25,38 @@
                     <span  style="text-transform:uppercase;">photos</span>
                     <small></small>
                 </h1>
-                <ol class="breadcrumb">
-                    <li>
-                        <i class="fa fa-dashboard"></i> <a href="index.html">Dashboard</a>
-                    </li>
-                    <li class="active">
-                        <i class="fa fa-file"></i> Blank Page
-                    </li>
-                </ol>
+                <!-- Start of table -->
+                <div class="col-md-12">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>THUMBNAIL</th>
+                        <th>ID</th>
+                        <th>TITLE</th>
+                        <th>DESCTIPTION</th>
+                        <th>FILENAME</th>
+                        <th>TYPE</th>
+                        <th>SIZE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+          <?php foreach ($photos as $photo) : ?>
+                      <tr>
+                        <td><img src="<?php echo $photo->picture_path(); ?>" class="img-fluid img-thumbnail" /></td>
+                        <td><?php echo $photo->id; ?></td>
+                        <td><?php echo $photo->title; ?></td>
+                        <td><?php echo substr($photo->description,0,20)." ..."; ?></td>
+                        <td><?php echo $photo->filename; ?></td>
+                        <td><?php echo $photo->type; ?></td>
+                        <td><?php echo $photo->size; ?></td>
+                      </tr>
+                    <?php endforeach; ?>
+                    </tbody>
+                  </table>
+                  <!-- End of table -->
+                </div>
+
+
             </div>
         </div>
         <!-- /.row -->
