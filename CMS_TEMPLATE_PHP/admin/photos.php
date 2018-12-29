@@ -42,7 +42,12 @@
                     <tbody>
           <?php foreach ($photos as $photo) : ?>
                       <tr>
-                        <td><img src="<?php echo $photo->picture_path(); ?>" class="img-fluid img-thumbnail" /></td>
+                        <td>
+                          <img src="<?php echo $photo->picture_path(); ?>" class="img-fluid img-thumbnail" />
+                          <a href="delete_photo.php?id=<?php echo $photo->id; ?>">Delete</a>
+                          <a href="edit_photo.php?id=<?php echo $photo->id; ?>">Edit</a>
+                          <a href="#">View</a>
+                        </td>
                         <td><?php echo $photo->id; ?></td>
                         <td><?php echo $photo->title; ?></td>
                         <td><?php echo substr($photo->description,0,20)." ..."; ?></td>

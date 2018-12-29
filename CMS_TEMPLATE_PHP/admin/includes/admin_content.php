@@ -8,6 +8,10 @@
                     <small></small>
                 </h1>
                 <?php
+                     // $photo = Photo::find_by_id(31);
+                     // echo $photo->title;
+
+
                   // $user = new User();
                   // $user->username = "baby";
                   // $user->password = "24.12.0000";
@@ -32,15 +36,15 @@
                   //   echo $user->username;
                   // }
 
-                  $photos = Photo::find_all();
-                  foreach ($photos as $photo){
-                    echo $photo->id . "<br />";
-                    echo $photo->title . "<br />";
-                    echo $photo->description . "<br />";
-                    echo $photo->filename . "<br />";
-                    echo $photo->type . "<br />";
-                    echo $photo->size . "<br />";
-                  }
+                  // $photos = Photo::find_all();
+                  // foreach ($photos as $photo){
+                  //   echo $photo->id . "<br />";
+                  //   echo $photo->title . "<br />";
+                  //   echo $photo->description . "<br />";
+                  //   echo $photo->filename . "<br />";
+                  //   echo $photo->type . "<br />";
+                  //   echo $photo->size . "<br />";
+                  // }
 
                   // $photo = new Photo();
                   // $photo->title = "photo_from_web";
