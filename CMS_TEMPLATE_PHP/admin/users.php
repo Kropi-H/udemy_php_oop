@@ -49,7 +49,6 @@
                           <p><?php echo $user->username; ?></p>
                           <a href="delete_user.php?id=<?php echo $user->id; ?>">Delete</a>
                           <a href="edit_user.php?id=<?php echo $user->id; ?>">Edit</a>
-                          <a href="#">View</a>
                         </td>
                         <td><?php echo $user->first_name; ?></td>
                         <td><?php echo $user->last_name; ?></td>

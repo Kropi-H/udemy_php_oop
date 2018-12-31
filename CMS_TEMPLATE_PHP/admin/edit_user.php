@@ -1,6 +1,5 @@
 <?php include("includes/header.php"); ?>
 <?php if(!$session->is_signed_in()) {redirect("login.php");} ?>
-<?php // $photos = Photo::find_all(); ?>
 
 <?php
 $message = "";
@@ -15,10 +14,23 @@ if(empty($_GET['id'])){
     if($user){
 
     $user->username =  $_POST['username'];
-    $user->first_name = $_POST['first_name'];
+    $user->first_print_rname = $_POST['first_name'];
     $user->last_name = $_POST['last_name'];
+    $user->password = $_POST['password'];
+
+    if(empty($_FILES['user_image'])){
+
+      $user->update();
+
+    } else {
+
+      $user->set_file($_FILES['user_image']);
+      $user->save_user_and_image();
+      $user->save();
+
+    }
+
     $message = "updated!";
-    $user->save();
 
     }
   }
@@ -49,13 +61,17 @@ if(empty($_GET['id'])){
                     <small><?php echo $user->username ." ".$message ?></small></small>
                 </h1>
                 <!-- Start update form -->
-                <form class="" action="" method="post">
+                <form class="" action="" method="post" enctype="multipart/form-data">
                   <p class="text ">
                     User Id: <span class="data photo_id_box"><?php echo $user->id; ?></span>
                   </p>
                 <div class="form-group">
                   <label for="alternate_text">Image</label>
                   <a href="#"><img src="<?php echo $user->image_user_placeholder(); ?>" alt="<?php ?>" class="img-rounded center-block img-thumbnail"></a>
+                </div>
+                <div class="form-group">
+                  <label for="file">Change Photo</label>
+                  <input id="file" type="file" name="user_image" value="">
                 </div>
                 <div class="form-group">
                   <label for="username">Username</label>
@@ -68,6 +84,10 @@ if(empty($_GET['id'])){
                 <div class="form-group">
                   <label for="last_name">Last Name</label>
                   <input id="last_name" class="form-control" type="text" name="last_name" value="<?php echo $user->last_name; ?>">
+                </div>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input id="password" class="form-control" type="password" name="password" value="<?php echo $user->password; ?>">
                 </div>
                   <!-- End update form -->
                 </div>

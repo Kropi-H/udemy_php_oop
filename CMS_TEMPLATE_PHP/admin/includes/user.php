@@ -57,12 +57,11 @@ class User extends Db_object {
 
     }
 
-
       public function save_user_and_image(){
 
-        if ($this->id){
-          $this->update();
-        } else {
+        // if ($this->id){
+        //   $this->update();
+        // } else {
 
           if(!empty($this->errors)){
             return false;
@@ -80,16 +79,27 @@ class User extends Db_object {
           }
 
           if(move_uploaded_file($this->tmp_path, $target_path)){
-            if($this->create()){
+              // if($this->create()){
               unset($this->tmp_path);
               return true;
-            }
+              // }
 
           } else {
 
             $this->errors[] = "The file directory probably doesn't have promission";
             return false;
           }
+        }
+      // }
+
+      public function delete_photo(){
+
+        if($this->delete()){
+          $target_path = SITE_ROOT .DS. 'admin' .DS. $this->image_user_placeholder();
+          return unlink($target_path) ? true : false;
+
+        } else {
+          return false;
         }
       }
 
