@@ -1,0 +1,5 @@
+#ignore init file
+CMS_TEMPLATE_PHP/admin/includes/init.php
+
+#ignore database connection file
+CMS_TEMPLATE_PHP/admin/includes/new_config.php

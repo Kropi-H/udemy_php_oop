@@ -22,8 +22,7 @@ class Database {
 
             die("Database connection failed padly" . $this->connection->connect_error);
 
-        } else {
-//            echo "we are connected";
+
         }
 
     }
@@ -53,8 +52,8 @@ class Database {
     }
 
     public function the_insert_id(){
-     return mysqli_insert_id($this->connection);
-        // return $this->connection->insert_id;
+     // return mysqli_insert_id($this->connection);
+        return $this->connection->insert_id;
     }
 
 }

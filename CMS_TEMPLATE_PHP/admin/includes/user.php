@@ -36,27 +36,6 @@ class User extends Db_object {
       return empty($this->user_image) ? $this->image_placeholder : $this->upload_directory .DS. $this->user_image;
     }
 
-    public function set_file($file){
-
-      if(empty($file) || !$file || !is_array($file)){
-        $this->errors[] = "There was not file uploaded here";
-
-      } elseif ($file['error'] !=0){
-        $this->errors[] = $this->upload_errors_array[$file['error']];
-
-        return false;
-
-      } else {
-
-        $this->user_image = basename($file['name']);
-        $this->tmp_path = $file['tmp_name'];
-        $this->type = $file['type'];
-        $this->size = $file['size'];
-
-      }
-
-    }
-
       public function save_user_and_image(){
 
         // if ($this->id){

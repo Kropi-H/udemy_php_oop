@@ -20,6 +20,9 @@
                         <a href="#">Services</a>
                     </li>
                     <li>
+                        <a href="photo.php">Photo</a>
+                    </li>
+                    <li>
                         <a href="admin/">Admin</a>
                     </li>
                 </ul>

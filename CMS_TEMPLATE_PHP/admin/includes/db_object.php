@@ -13,13 +13,34 @@ class Db_object {
       UPLOAD_ERR_NO_TMP_DIR =>  "Missing a temorary folder",
       UPLOAD_ERR_CANT_WRITE =>  "Failed to write file to disk",
       UPLOAD_ERR_EXTENSION  =>  "A PHP extension stopped the file upload"
-  );
+    );
 
-      protected static $db_table = "users";
+
+      public function set_file($file){
+
+        if(empty($file) || !$file || !is_array($file)) {
+          $this->errors[] = "There was not file uploaded here";
+
+        } elseif ($file['error'] !=0){
+          $this->errors[] = $this->upload_errors_array[$file['error']];
+
+          return false;
+
+        } else {
+
+          $this->user_image = basename($file['name']);
+          $this->tmp_path = $file['tmp_name'];
+          $this->type     = $file['type'];
+          $this->size     = $file['size'];
+
+        }
+
+      }
+
 
   //  new function to find all users
-      static public function find_all(){
-          global $database;
+      public static function find_all(){
+          // global $database;
 
           return static::find_by_query("SELECT * FROM " . static::$db_table . " ");
 
@@ -27,7 +48,7 @@ class Db_object {
 
       static public function find_by_id($id){
           global $database;
-          $the_result_array = static::find_by_query("SELECT * FROM " . static::$db_table . " WHERE id=$id");
+          $the_result_array = static::find_by_query("SELECT * FROM " . static::$db_table . " WHERE id = $id LIMIT 1");
 
           return !empty($the_result_array) ? array_shift($the_result_array) : false;
 
@@ -52,7 +73,7 @@ class Db_object {
 
           $the_object = new $calling_class;
 
-          foreach($the_record as $the_attribute => $value){
+          foreach ($the_record as $the_attribute => $value){
 
               if($the_object->has_the_attribute($the_attribute)){
                 $the_object->$the_attribute = $value;
@@ -64,15 +85,17 @@ class Db_object {
 
       private function has_the_attribute($the_attribute){
 
-          $object_properties = get_object_vars($this);
+          // $object_properties = get_object_vars($this);
 
-          return array_key_exists($the_attribute, $object_properties);
-
+          // return array_key_exists($the_attribute, $object_properties);
+          return property_exists($this, $the_attribute);
       }
+
+
 
       protected function properties(){
 
-          $db_table_fields = array();
+          $properties = array();
 
           foreach (static::$db_table_fields as $db_field) {
 
@@ -100,24 +123,22 @@ class Db_object {
 
       // save user
           public function save(){
-            global $database;
-
+            // global $database;
             return isset($this->id) ? $this->update() : $this->create();
             // if(isset($this->id)){
             //    $this->update();
             // } else {
             //   return $this->create();
             // }
-          } // end save userget_object_vars($this);
+          } // end save user get_object_vars($this);
 
       // create user
           public function create(){
             global $database;
             $properties = $this->clean_properties();
 
-            $sql = "INSERT INTO " . static::$db_table . "(". implode(",", array_keys($properties)) . ")";
-            $sql .= "VALUES ('" . implode("','", array_values($properties)) . "')";
-
+            $sql = "INSERT INTO " . static::$db_table . "(" . implode(",", array_keys($properties)) . ")";
+        		$sql .= "VALUES ('". implode("','", array_values($properties)) ."')";
 
             if($database->query($sql)){
               $this->id = $database->the_insert_id();
@@ -126,9 +147,9 @@ class Db_object {
               return false;
             }
 
-          } // end of create the user
+          } // end of create
 
-      // update user method
+      // update method
           public function update(){
             global $database;
             $properties = $this->clean_properties();
@@ -150,7 +171,7 @@ class Db_object {
           public function delete(){
             global $database;
             $sql = "DELETE FROM " . static::$db_table . " ";
-            $sql .= "WHERE id= " . $database->escape_string($this->id);
+            $sql .= "WHERE id=" . $database->escape_string($this->id);
             $sql .= " LIMIT 1";
 
             $database->query($sql);
@@ -159,6 +180,20 @@ class Db_object {
 
           } // end of delete method
 
+
+
+          public static function count_all() {
+
+      			global $database;
+
+      			$sql = "SELECT COUNT(*) FROM " . static::$db_table;
+      			$result_set = $database->query($sql);
+      			$row = mysqli_fetch_array($result_set);
+
+      			return array_shift($row);
+
+
+      		}
 
 }
 
